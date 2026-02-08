@@ -1,55 +1,78 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+
+Version change: None (initial creation) → 1.0.0
+List of modified principles: All principles were newly added.
+Added sections: All sections were newly added based on user input.
+Removed sections: None.
+Templates requiring updates:
+- .specify/templates/plan-template.md (⚠ pending)
+- .specify/templates/spec-template.md (⚠ pending)
+- .specify/templates/tasks-template.md (⚠ pending)
+Follow-up TODOs if any placeholders intentionally deferred: None.
+-->
+# Hackathon II – Phase 2: Todo Full-Stack Web Application Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. NO DUMMY IMPLEMENTATIONS
+- Do NOT use mock data, fake APIs, hardcoded users, in-memory lists, placeholder auth, or bypass logic.
+- Do NOT use comments like “TODO”, “mock”, “later”, or “example only” for any core requirement.
+- Wherever real production logic is technically possible, it MUST be implemented fully.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. REAL FULL-STACK ARCHITECTURE IS MANDATORY
+- Frontend MUST be a real Next.js 16+ App Router application.
+- Backend MUST be a real FastAPI service.
+- Database MUST be Neon Serverless PostgreSQL using SQLModel.
+- Data MUST persist across restarts (no memory storage).
+- Authentication MUST use Better Auth with real JWT issuance and verification.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. AUTHENTICATION & SECURITY ARE CRITICAL
+- JWT tokens MUST be issued by Better Auth on the frontend.
+- Every backend request MUST require a valid Authorization: Bearer <token>.
+- FastAPI MUST verify JWT signature using a shared secret.
+- User identity MUST be extracted from the token, NOT trusted from request input.
+- All database queries MUST be filtered by the authenticated user.
+- User A MUST NEVER see or modify User B’s data under any condition.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. MONOREPO + SPEC-KIT STRUCTURE IS REQUIRED
+- Use a monorepo with frontend/, backend/, specs/, and .spec-kit/config.yaml.
+- Specs MUST be organized by type: features, api, database, ui.
+- Multiple CLAUDE.md files MUST exist:
+  - Root CLAUDE.md (project-wide rules)
+  - frontend/CLAUDE.md (frontend-specific rules)
+  - backend/CLAUDE.md (backend-specific rules)
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. SPEC-FIRST WORKFLOW (NO EXCEPTIONS)
+- Always follow this order:
+  Write/Update Spec → Generate Plan → Break into Tasks → Implement
+- NEVER implement before specs exist.
+- All implementations MUST trace back to explicit specs.
+- If a requirement is unclear, STOP and require clarification in specs.
 
-### [PRINCIPLE_6_NAME]
+### VI. CONFIGURATION VS DUMMY (IMPORTANT DISTINCTION)
+- External credentials (Neon DB URL, Better Auth keys, JWT secret) CANNOT be invented.
+- These MUST be represented as environment variables with clear names.
+- At the END of implementation, you MUST explicitly list:
+  - What the user must configure
+  - In which file
+  - With what type of value
+- You MUST NOT silently skip or fake any external dependency.
 
+### VII. FUTURE-PROOFING
+- Architecture MUST be extensible for later phases (chatbot, MCP tools, event-driven systems).
+- Avoid tightly coupled or hacky solutions.
+- Code and specs MUST be clean, readable, and maintainable.
 
-[PRINCIPLE__DESCRIPTION]
-
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
-
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Success Definition
+Phase 2 is considered complete ONLY if:
+- A real multi-user web app works end-to-end
+- Auth is real and enforced everywhere
+- Data persists in Neon PostgreSQL
+- User isolation is guaranteed
+- All work is driven by specs and documented clearly
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+This constitution supersedes all other practices. Amendments require documentation, approval, and a migration plan. All PRs/reviews must verify compliance. Complexity must be justified. Use `CLAUDE.md` for runtime development guidance.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-02-05 | **Last Amended**: 2026-02-05
