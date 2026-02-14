@@ -79,10 +79,14 @@ export default function EditTaskPage() {
       return;
     }
 
-    const dummyUserId = "00000000-0000-0000-0000-000000000001"; // TODO: Replace with actual user_id
+    const userId = getUserId();
+    if (!userId) {
+      router.push("/login");
+      return;
+    }
 
     try {
-      await updateTask(dummyUserId, taskId, {
+      await updateTask(userId, taskId, {
         title,
         description: description || null,
         completed,
