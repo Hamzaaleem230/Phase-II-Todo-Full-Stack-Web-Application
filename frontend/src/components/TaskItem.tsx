@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface Task {
   id: string;
@@ -13,30 +13,78 @@ interface Task {
 interface TaskItemProps {
   task: Task;
   onToggleComplete: (taskId: string, completed: boolean) => void;
-  onDelete: (taskId: string) => void; // Add onDelete prop
-  // onEdit: (taskId: string) => void;
+  onDelete: (taskId: string) => void;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task, onToggleComplete, onDelete }) => {
+const TaskItem: React.FC<TaskItemProps> = ({
+  task,
+  onToggleComplete,
+  onDelete,
+}) => {
   return (
-    <li style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px', borderRadius: '5px', display: 'flex', alignItems: 'center' }}>
-      <input 
-        type="checkbox" 
-        checked={task.completed} 
-        onChange={() => onToggleComplete(task.id, !task.completed)} 
-        style={{ marginRight: '10px' }}
+    <li
+      className="
+        w-full
+        bg-white dark:bg-zinc-900
+        border border-gray-200 dark:border-gray-700
+        rounded-lg
+        p-4
+        shadow-sm
+        flex
+        flex-col
+        sm:flex-row
+        sm:items-center
+        gap-4
+        transition
+      "
+    >
+      {/* Checkbox */}
+      <input
+        type="checkbox"
+        checked={task.completed}
+        onChange={() =>
+          onToggleComplete(task.id, !task.completed)
+        }
+        className="w-4 h-4 sm:w-5 sm:h-5 accent-blue-600"
       />
-      <div style={{ flexGrow: 1 }}>
-        <h2 style={{ margin: '0 0 5px 0', textDecoration: task.completed ? 'line-through' : 'none' }}>{task.title}</h2>
-        {task.description && <p style={{ margin: '0', fontSize: '0.9em', color: '#666' }}>{task.description}</p>}
+
+      {/* Task Content */}
+      <div className="flex-1">
+        <h2
+          className={`text-base sm:text-lg font-semibold ${
+            task.completed
+              ? "line-through text-gray-400"
+              : "text-gray-900 dark:text-white"
+          }`}
+        >
+          {task.title}
+        </h2>
+
+        {task.description && (
+          <p className="text-sm text-gray-500 mt-1">
+            {task.description}
+          </p>
+        )}
       </div>
-      <button 
-        onClick={() => onDelete(task.id)} 
-        style={{ marginLeft: '10px', padding: '5px 10px', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+
+      {/* Delete Button */}
+      <button
+        onClick={() => onDelete(task.id)}
+        className="
+          w-full
+          sm:w-auto
+          px-4
+          py-2
+          text-sm
+          rounded-lg
+          bg-red-500
+          hover:bg-red-600
+          text-white
+          transition
+        "
       >
         Delete
       </button>
-      {/* Add edit button here later */}
     </li>
   );
 };

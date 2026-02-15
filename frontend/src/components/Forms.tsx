@@ -1,5 +1,5 @@
 // frontend/components/Forms.tsx
-import React from 'react';
+import React from "react";
 
 interface FormFieldProps {
   label: string;
@@ -15,7 +15,7 @@ interface FormFieldProps {
 
 export const FormField: React.FC<FormFieldProps> = ({
   label,
-  type = 'text',
+  type = "text",
   id,
   value,
   onChange,
@@ -25,10 +25,14 @@ export const FormField: React.FC<FormFieldProps> = ({
   rows = 4,
 }) => {
   return (
-    <div>
-      <label htmlFor={id} style={{ display: 'block', marginBottom: '5px' }}>
-        {label}:
+    <div className="w-full">
+      <label
+        htmlFor={id}
+        className="block mb-1 text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300"
+      >
+        {label}
       </label>
+
       {textarea ? (
         <textarea
           id={id}
@@ -37,7 +41,22 @@ export const FormField: React.FC<FormFieldProps> = ({
           required={required}
           disabled={disabled}
           rows={rows}
-          style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
+          className="
+            w-full
+            px-3 sm:px-4
+            py-2 sm:py-2.5
+            text-sm sm:text-base
+            rounded-lg
+            border border-gray-300
+            dark:border-gray-700
+            bg-white dark:bg-zinc-900
+            text-gray-900 dark:text-white
+            focus:outline-none
+            focus:ring-2
+            focus:ring-blue-500
+            focus:border-blue-500
+            disabled:opacity-60
+          "
         />
       ) : (
         <input
@@ -47,7 +66,22 @@ export const FormField: React.FC<FormFieldProps> = ({
           onChange={onChange}
           required={required}
           disabled={disabled}
-          style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
+          className="
+            w-full
+            px-3 sm:px-4
+            py-2 sm:py-2.5
+            text-sm sm:text-base
+            rounded-lg
+            border border-gray-300
+            dark:border-gray-700
+            bg-white dark:bg-zinc-900
+            text-gray-900 dark:text-white
+            focus:outline-none
+            focus:ring-2
+            focus:ring-blue-500
+            focus:border-blue-500
+            disabled:opacity-60
+          "
         />
       )}
     </div>
@@ -57,7 +91,7 @@ export const FormField: React.FC<FormFieldProps> = ({
 interface FormButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
-  type?: 'submit' | 'button';
+  type?: "submit" | "button";
   disabled?: boolean;
   primary?: boolean;
 }
@@ -65,24 +99,32 @@ interface FormButtonProps {
 export const FormButton: React.FC<FormButtonProps> = ({
   children,
   onClick,
-  type = 'button',
+  type = "button",
   disabled = false,
   primary = false,
 }) => {
-  const backgroundColor = primary ? '#0070f3' : '#6c757d';
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      style={{
-        padding: '10px 15px',
-        backgroundColor: backgroundColor,
-        color: 'white',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: disabled ? 'not-allowed' : 'pointer',
-      }}
+      className={`
+        w-full
+        sm:w-auto
+        px-4 sm:px-5
+        py-2.5 sm:py-3
+        text-sm sm:text-base
+        rounded-lg
+        font-semibold
+        transition
+        disabled:opacity-60
+        disabled:cursor-not-allowed
+        ${
+          primary
+            ? "bg-blue-600 hover:bg-blue-700 text-white"
+            : "bg-gray-600 hover:bg-gray-700 text-white"
+        }
+      `}
     >
       {children}
     </button>

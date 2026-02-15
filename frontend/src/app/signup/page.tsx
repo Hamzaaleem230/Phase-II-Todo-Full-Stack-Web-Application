@@ -45,43 +45,85 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4 text-white">
-      
+    <main className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4 sm:px-6 lg:px-8 text-white">
+
       {/* Card */}
-      <div className="w-full max-w-md bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+      <div className="
+        w-full
+        max-w-sm
+        sm:max-w-md
+        md:max-w-lg
+        bg-white/5
+        backdrop-blur-xl
+        border border-white/10
+        rounded-2xl
+        p-6
+        sm:p-8
+        md:p-10
+        shadow-2xl
+      ">
         
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="bg-blue-600 w-14 h-14 mx-auto rounded-xl flex items-center justify-center mb-4">
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="
+            bg-blue-600
+            w-12 h-12
+            sm:w-14 sm:h-14
+            md:w-16 md:h-16
+            mx-auto
+            rounded-xl
+            flex
+            items-center
+            justify-center
+            mb-4
+            text-lg sm:text-xl
+          ">
             ✨
           </div>
-          <h1 className="text-2xl font-bold">Create Account</h1>
-          <p className="text-gray-400 text-sm mt-1">
+
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+            Create Account
+          </h1>
+
+          <p className="text-gray-400 text-xs sm:text-sm mt-1">
             Start managing your tasks smarter
           </p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
           
           {/* Email */}
           <div>
-            <label className="text-sm text-gray-300 mb-1 block">
+            <label className="text-xs sm:text-sm text-gray-300 mb-1 block">
               Email
             </label>
+
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               placeholder="you@example.com"
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 outline-none"
+              className="
+                w-full
+                px-3 sm:px-4
+                py-2.5 sm:py-3
+                text-sm sm:text-base
+                rounded-lg
+                bg-black/40
+                border border-white/10
+                focus:border-blue-500
+                focus:ring-2
+                focus:ring-blue-500/30
+                outline-none
+              "
             />
           </div>
 
           {/* Password */}
           <div>
-            <label className="text-sm text-gray-300 mb-1 block">
+            <label className="text-xs sm:text-sm text-gray-300 mb-1 block">
               Password
             </label>
 
@@ -92,14 +134,34 @@ export default function SignupPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="••••••••"
-                className="w-full px-4 py-3 pr-12 rounded-lg bg-black/40 border border-white/10 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 outline-none"
+                className="
+                  w-full
+                  px-3 sm:px-4
+                  py-2.5 sm:py-3
+                  pr-12
+                  text-sm sm:text-base
+                  rounded-lg
+                  bg-black/40
+                  border border-white/10
+                  focus:border-blue-500
+                  focus:ring-2
+                  focus:ring-blue-500/30
+                  outline-none
+                "
               />
 
-              {/* Eye Toggle */}
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                className="
+                  absolute
+                  right-3
+                  top-1/2
+                  -translate-y-1/2
+                  text-gray-400
+                  hover:text-white
+                  text-sm sm:text-base
+                "
               >
                 {showPassword ? "🙈" : "👁️"}
               </button>
@@ -107,7 +169,7 @@ export default function SignupPage() {
           </div>
 
           {error && (
-            <p className="text-sm text-red-400 text-center">
+            <p className="text-xs sm:text-sm text-red-400 text-center">
               {error}
             </p>
           )}
@@ -115,14 +177,24 @@ export default function SignupPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-semibold transition disabled:opacity-60"
+            className="
+              w-full
+              bg-blue-600
+              hover:bg-blue-700
+              py-2.5 sm:py-3
+              text-sm sm:text-base
+              rounded-lg
+              font-semibold
+              transition
+              disabled:opacity-60
+            "
           >
             {loading ? "Creating account..." : "Sign Up"}
           </button>
         </form>
 
         {/* Footer */}
-        <p className="text-sm text-center mt-6 text-gray-400">
+        <p className="text-xs sm:text-sm text-center mt-6 text-gray-400">
           Already have an account?{" "}
           <span
             onClick={() => router.push("/login")}
@@ -131,6 +203,7 @@ export default function SignupPage() {
             Login
           </span>
         </p>
+
       </div>
     </main>
   );

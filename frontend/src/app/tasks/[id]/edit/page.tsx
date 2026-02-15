@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { getToken, removeToken, getUserId } from "@/lib/auth";
 import { FormField, FormButton } from "@/components/Forms";
-import { fetchTaskById, updateTask } from "@/lib/api"; // Assuming these functions will be added to api.ts
+import { fetchTaskById, updateTask } from "@/lib/api";
 
 interface Task {
   id: string;
@@ -100,60 +100,98 @@ export default function EditTaskPage() {
   };
 
   if (loading) {
-    return <div style={{ padding: "20px" }}>Loading task...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-white bg-gradient-to-br from-black via-gray-900 to-black px-4">
+        Loading task...
+      </div>
+    );
   }
 
   if (error) {
-    return <div style={{ padding: "20px", color: "red" }}>Error: {error}</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-red-500 bg-gradient-to-br from-black via-gray-900 to-black px-4 text-center">
+        Error: {error}
+      </div>
+    );
   }
 
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
-      <h1 style={{ marginBottom: "20px" }}>Edit Task</h1>
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", flexDirection: "column", gap: "15px" }}
-      >
-        <FormField
-          label="Title"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          disabled={submitting}
-        />
-        <FormField
-          label="Description (optional)"
-          id="description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          textarea
-          rows={4}
-          disabled={submitting}
-        />
-        <div>
-          <input
-            type="checkbox"
-            id="completed"
-            checked={completed}
-            onChange={(e) => setCompleted(e.target.checked)}
-            disabled={submitting}
-            style={{ marginRight: "10px" }}
-          />
-          <label htmlFor="completed">Completed</label>
-        </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <FormButton type="submit" primary disabled={submitting}>
-          {submitting ? "Updating..." : "Update Task"}
-        </FormButton>
-        <FormButton
-          type="button"
-          onClick={() => router.push("/tasks")}
-          disabled={submitting}
+    <main className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center px-4 sm:px-6 lg:px-8 text-white">
+
+      <div className="
+        w-full
+        max-w-sm
+        sm:max-w-md
+        md:max-w-lg
+        bg-white/5
+        backdrop-blur-xl
+        border border-white/10
+        rounded-2xl
+        p-6
+        sm:p-8
+        md:p-10
+        shadow-2xl
+      ">
+
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 text-center">
+          Edit Task
+        </h1>
+
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-4 sm:gap-5"
         >
-          Cancel
-        </FormButton>
-      </form>
-    </div>
+          <FormField
+            label="Title"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            disabled={submitting}
+          />
+
+          <FormField
+            label="Description (optional)"
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            textarea
+            rows={4}
+            disabled={submitting}
+          />
+
+          <div className="flex items-center gap-2 text-sm sm:text-base">
+            <input
+              type="checkbox"
+              id="completed"
+              checked={completed}
+              onChange={(e) => setCompleted(e.target.checked)}
+              disabled={submitting}
+              className="w-4 h-4"
+            />
+            <label htmlFor="completed">Completed</label>
+          </div>
+
+          {error && (
+            <p className="text-red-400 text-sm text-center">
+              {error}
+            </p>
+          )}
+
+          <FormButton type="submit" primary disabled={submitting}>
+            {submitting ? "Updating..." : "Update Task"}
+          </FormButton>
+
+          <FormButton
+            type="button"
+            onClick={() => router.push("/tasks")}
+            disabled={submitting}
+          >
+            Cancel
+          </FormButton>
+        </form>
+
+      </div>
+    </main>
   );
 }

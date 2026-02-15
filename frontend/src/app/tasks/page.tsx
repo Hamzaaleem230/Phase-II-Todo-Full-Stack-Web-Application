@@ -98,9 +98,11 @@ export default function TasksPage() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-black">
+      
       {/* Page Header */}
-      <div className="max-w-4xl mx-auto px-6 pt-12 pb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-12 pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white text-center sm:text-left">
           My Tasks
         </h1>
 
@@ -113,14 +115,14 @@ export default function TasksPage() {
               router.push("/tasks/create");
             }
           }}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm sm:text-base"
         >
           + New Task
         </button>
       </div>
 
       {/* Content */}
-      <div className="max-w-4xl mx-auto px-6 pb-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         {loading ? (
           <p className="text-center text-gray-500">Loading tasks...</p>
         ) : tasks.length === 0 ? (
@@ -132,11 +134,23 @@ export default function TasksPage() {
             {tasks.map((task) => (
               <div
                 key={task.id}
-                className="bg-white dark:bg-zinc-900 p-4 rounded-lg shadow flex items-center justify-between"
+                className="
+                  bg-white dark:bg-zinc-900
+                  p-4 sm:p-5
+                  rounded-lg
+                  shadow
+                  flex
+                  flex-col
+                  sm:flex-row
+                  sm:items-center
+                  sm:justify-between
+                  gap-4
+                "
               >
-                <div>
+                {/* Task Info */}
+                <div className="flex-1">
                   <h2
-                    className={`text-lg font-semibold ${
+                    className={`text-base sm:text-lg font-semibold ${
                       task.completed
                         ? "line-through text-gray-400"
                         : "text-gray-900 dark:text-white"
@@ -145,34 +159,36 @@ export default function TasksPage() {
                     {task.title}
                   </h2>
                   {task.description && (
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 mt-1">
                       {task.description}
                     </p>
                   )}
                 </div>
 
-                <div className="flex gap-2">
+                {/* Buttons */}
+                <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => toggleComplete(task.id)}
-                    className="px-3 py-1 text-sm rounded bg-green-600 text-white hover:bg-green-700"
+                    className="flex-1 sm:flex-none px-3 py-1.5 text-xs sm:text-sm rounded bg-green-600 text-white hover:bg-green-700"
                   >
                     {task.completed ? "Undo" : "Done"}
                   </button>
 
                   <button
                     onClick={() => router.push(`/tasks/${task.id}/edit`)}
-                    className="px-3 py-1 text-sm rounded bg-yellow-500 text-white hover:bg-yellow-600"
+                    className="flex-1 sm:flex-none px-3 py-1.5 text-xs sm:text-sm rounded bg-yellow-500 text-white hover:bg-yellow-600"
                   >
                     Edit
                   </button>
 
                   <button
                     onClick={() => deleteTask(task.id)}
-                    className="px-3 py-1 text-sm rounded bg-red-500 text-white hover:bg-red-600"
+                    className="flex-1 sm:flex-none px-3 py-1.5 text-xs sm:text-sm rounded bg-red-500 text-white hover:bg-red-600"
                   >
                     Delete
                   </button>
                 </div>
+
               </div>
             ))}
           </div>

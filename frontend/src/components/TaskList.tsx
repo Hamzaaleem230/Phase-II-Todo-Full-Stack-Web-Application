@@ -1,5 +1,5 @@
 import React from 'react';
-import TaskItem from './TaskItem'; // Import TaskItem
+import TaskItem from './TaskItem';
 
 interface Task {
   id: string;
@@ -14,18 +14,22 @@ interface Task {
 interface TaskListProps {
   tasks: Task[];
   onTaskToggle: (taskId: string, completed: boolean) => void;
-  onTaskDelete: (taskId: string) => void; // Add onTaskDelete prop
+  onTaskDelete: (taskId: string) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onTaskToggle, onTaskDelete }) => {
+const TaskList: React.FC<TaskListProps> = ({
+  tasks,
+  onTaskToggle,
+  onTaskDelete,
+}) => {
   return (
-    <ul style={{ listStyle: 'none', padding: 0 }}>
+    <ul className="list-none p-0 flex flex-col gap-4 w-full">
       {tasks.map((task) => (
-        <TaskItem 
-          key={task.id} 
-          task={task} 
-          onToggleComplete={onTaskToggle} 
-          onDelete={onTaskDelete} // Pass onDelete to TaskItem
+        <TaskItem
+          key={task.id}
+          task={task}
+          onToggleComplete={onTaskToggle}
+          onDelete={onTaskDelete}
         />
       ))}
     </ul>
